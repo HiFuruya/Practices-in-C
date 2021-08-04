@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "parkif.h"
+#include <windows.h>
 
 int main()
 {
@@ -41,7 +42,6 @@ int main()
 
 	    	add(x);
 	    	printf("\n[OK]\n");
-	    	fflush(stdin);
 	    	break;
 
 	    	case 2:
@@ -64,13 +64,11 @@ int main()
 	    		printf("\n[Estacionamento vazio]\n");
 	    	}
     		placa = realloc(NULL, 50 * sizeof(char));
-	    	fflush(stdin);
 	    	break;
 
 	    	case 3:
 	    	view();
 	    	printf("\n");
-	    	fflush(stdin);
 	    	break;
 
 	    	case 0:
@@ -80,7 +78,7 @@ int main()
 	    	printf("\nNenhuma opcao foi escolhida");
 	    	break;
 	    }
-	    sleep(2);
+	    Sleep(2000);
 	}
     return 0;
 }

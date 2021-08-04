@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include <windows.h>
 
 FILE *fp, *au;
 int ret;
@@ -105,7 +105,7 @@ void view() {
 		printf("Erro ao abrir o arquivo");
 	}
 
-    sleep(pos * 3);
+    Sleep(pos * 3000);
 }
 
 #endif
