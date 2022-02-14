@@ -4,24 +4,28 @@
 #include<string>
 #include <fstream>
 
+#include<iostream>
+
+using namespace std;
+
 class Pessoa
 {
 private:
-    std::string nome;
-    std::string email;
+    string nome;
+    string email;
     int telefone;
     int idade;
 
 public:
-    Pessoa(std::string _nome, std::string _email, int _telefone, int _idade);
+    Pessoa(string _nome, string _email, int _telefone, int _idade);
 
     Pessoa();
 
-    void setNome(std::string _nome);
-    std::string getNome();
+    void setNome(string _nome);
+    string getNome();
 
-    void setEmail(std::string _email);
-    std::string getEmail();
+    void setEmail(string _email);
+    string getEmail();
 
     void setTelefone(int _telefone);
     int getTelefone();
@@ -30,7 +34,7 @@ public:
     int getIdade();
 };
 
-Pessoa :: Pessoa(std::string _nome, std::string _email, int _telefone, int _idade){
+Pessoa :: Pessoa(string _nome, string _email, int _telefone, int _idade){
     nome = _nome;
     email = _email;
     telefone = _telefone;
@@ -39,19 +43,19 @@ Pessoa :: Pessoa(std::string _nome, std::string _email, int _telefone, int _idad
 
 Pessoa::Pessoa(){}
 
-void Pessoa :: setNome(std::string _nome){
+void Pessoa :: setNome(string _nome){
     nome = _nome;
 }
 
-std::string Pessoa::getNome(){
+string Pessoa::getNome(){
     return nome;
 }
 
-void Pessoa :: setEmail(std::string _email){
+void Pessoa :: setEmail(string _email){
     email = _email;
 }
 
-std::string Pessoa :: getEmail(){
+string Pessoa :: getEmail(){
     return email;
 }
 

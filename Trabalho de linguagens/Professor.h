@@ -4,22 +4,25 @@
 
 #include "Pessoa.h"
 #include <fstream>
+#include<iostream>
+
+using namespace std;
 
 class Professor: public Pessoa
 {
     private:
-        std::string materia;
+        string materia;
 
     public:
-        Professor(std::string _nome, std::string _email, int _telefone, int _idade, std::string _materia);
+        Professor(string _nome, string _email, int _telefone, int _idade, string _materia);
 
-        void setMateria(std::string _materia);
+        void setMateria(string _materia);
 
-        std::string getMateria();
+        string getMateria();
         
 };
 
-Professor :: Professor(std::string _nome, std::string _email, int _telefone, int _idade, std::string _materia){
+Professor :: Professor(string _nome, string _email, int _telefone, int _idade, string _materia){
     setNome(_nome);
     setEmail(_email);
     setTelefone(_telefone);
@@ -27,11 +30,11 @@ Professor :: Professor(std::string _nome, std::string _email, int _telefone, int
     materia = _materia;
 }
 
-void Professor :: setMateria(std::string _materia){
+void Professor :: setMateria(string _materia){
     materia = _materia;
 }
 
-std::string Professor :: getMateria(){
+string Professor :: getMateria(){
     return materia;
 }
 

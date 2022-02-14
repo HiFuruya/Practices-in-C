@@ -10,14 +10,16 @@
 #include"sqlite3.h"
 #include<sstream>
 
+using namespace std;
+
 class Comandos
 {
 public:
     int cadastrarProfessor(Professor professor);
 
-    bool cadastrarAluno(std::string nome, std::string email, int telefone, int idade, int anoMatricula);
+    int cadastrarAluno(Aluno aluno);
 
-    bool excluir(std::string nome);
+    bool excluir(string nome);
 
     void listar();
 
@@ -34,20 +36,21 @@ int Comandos :: cadastrarProfessor(Professor professor){
     exit = sqlite3_open("seminario.db", &DB);
 
     if (exit) {
-        std::cerr << "Erro na abertura " << sqlite3_errmsg(DB) << std::endl;
+        cerr << "Erro na abertura " << sqlite3_errmsg(DB) << endl;
         return 0;
     }
     else{
-        std::cout << "\n" << "Arquivo aberto com sucesso" << std::endl;
-        std::stringstream strm;
-        std::stringstream strmP;
-        strm << "insert into pessoa(nome, email, telefone, idade) values(" << professor.getNome() << ", " << professor.getEmail() << ", " << professor.getTelefone() << ", " << professor.getIdade() << ")";
-        strmP << "insert into professor(nome, materia) values(" << professor.getNome() << ", " << professor.getMateria() << ")";
+        cout << "\n" << "Arquivo aberto com sucesso" << endl;
+        stringstream strm;
+        stringstream strmP;
 
-        std::string s = strm.str();
+        strm << "insert into pessoa(nome, email, telefone, idade) values('"<< professor.getNome() <<"', '" << professor.getEmail() << "', " << professor.getTelefone() << ", " << professor.getIdade() << ")";
+        strmP << "insert into professor(nome, materia) values('" << professor.getNome() << "', '" << professor.getMateria() << "')";
+
+        string s = strm.str();
         char *str = &s[0];
 
-        std::string sP = strmP.str();
+        string sP = strmP.str();
         char *strP = &sP[0];
 
         sqlite3_stmt *statement;
@@ -74,67 +77,55 @@ int Comandos :: cadastrarProfessor(Professor professor){
     return -1;
 }
 
-bool Comandos :: cadastrarAluno(std::string nome, std::string email, int telefone, int idade, int anoMatricula){
+int Comandos :: cadastrarAluno(Aluno aluno){
 
-    Aluno *aluno = new Aluno(nome, email, telefone, idade, anoMatricula);
+    sqlite3* DB;
+    int exit = 0;
+    exit = sqlite3_open("seminario.db", &DB);
 
-    std::ofstream ofs("Alunos.txt", std::fstream::app);
+    if (exit) {
+        cerr << "Erro na abertura " << sqlite3_errmsg(DB) << std::endl;
+        return 0;
+    }
+    else{
+        cout << "\n" << "Arquivo aberto com sucesso" << endl;
+        stringstream strm;
+        stringstream strmA;
+        strm << "insert into pessoa(nome, email, telefone, idade) values('" << aluno.getNome() << "', '" << aluno.getEmail() << "', " << aluno.getTelefone() << ", " << aluno.getIdade() << ")";
+        strmA << "insert into aluno(nome, anoMatricula) values('" << aluno.getNome() << "', " << aluno.getAnoMatricula() << ")";
 
-    ofs << "Nome: ";
-    ofs << aluno->getNome();
-    ofs << " / " << "Email: " << aluno->getEmail();
-    ofs << " / " << "Telefone: " << aluno->getTelefone();
-    ofs << " / " << "Idade: " << aluno->getIdade();
-    ofs << " / " << "Materia: " << aluno->getAnoMatricula();
+        string s = strm.str();
+        char *str = &s[0];
 
-    ofs.close();
+        string sA = strmA.str();
+        char *strA = &sA[0];
 
-    return true;
+        sqlite3_stmt *statement;
+        int result;
+
+        char *query = str; {
+            if(sqlite3_prepare(DB,query,-1,&statement,0)==SQLITE_OK) {
+                sqlite3_step(statement);
+                sqlite3_finalize(statement);
+            }
+        }
+        
+        char *queryA = strA; {
+            if(sqlite3_prepare(DB,queryA,-1,&statement,0)==SQLITE_OK) {
+                int res=sqlite3_step(statement);
+                result=res;
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(DB);
+            return result;
+        }
+    }
+
+    return -1;
 }
 
 void Comandos::listar(){
 
-    Professor *p;
-
-    std::ifstream ifsP ("Professores.txt");
-
-    std::cout << "\nPROFESSORES\n";
-
-    if (ifsP.is_open())
-    {
-        std::string linha;
-        while (getline(ifsP, linha))
-        {
-            std::cout << "\n" << linha << "\n";
-        }
-        
-    }else
-    {
-        std::cout << "Nao foi possivel abrir o arquivo de Professores";
-    }
-    
-    ifsP.close();
-    
-    Aluno *a;
-
-    std::ifstream ifsA ("Alunos.txt");
-
-    std::cout << "\nALUNOS\n";
-
-    if (ifsA.is_open())
-    {
-        std::string linha;
-        while (getline(ifsA, linha))
-        {
-            std::cout << "\n" << linha << "\n";
-        }
-        
-    }else
-    {
-        std::cout << "Nao foi possivel abrir o arquivo de Alunos";
-    }
-    
-    ifsA.close();
 }
 
 #endif

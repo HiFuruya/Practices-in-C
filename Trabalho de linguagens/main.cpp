@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include"Comandos.h"
 #include"Professor.h"
-#include<iostream>
 #include "sqlite3.h"
+#include<iostream>
 
 using namespace std;
 
@@ -51,9 +51,10 @@ int main()
                 cout << "\nDigite o ano da matricula: ";
                 cin >> ano;
 
-                retorno = comando->cadastrarAluno(nome, email, telefone, idade, ano);
+                Aluno *aluno = new Aluno(nome, email, telefone, idade, ano);
+                retorno = comando->cadastrarAluno(*aluno);
 
-                if (retorno = SQLITE_DONE)
+                if (retorno == SQLITE_DONE)
                 {
                     cout << "\nAluno Cadastrado com Sucesso!\n";
                 }else
@@ -79,7 +80,7 @@ int main()
 
                 retorno = comando->cadastrarProfessor(*professor);
 
-                if (retorno = SQLITE_DONE)
+                if (retorno == SQLITE_DONE)
                 {
                     cout << "\nProfessor Cadastrado com Sucesso!\n";
                 }else

@@ -2,6 +2,9 @@
 #define ALUNO_H_INCLUDED
 
 #include"Pessoa.h"
+#include<iostream>
+
+using namespace std;
 
 class Aluno: public Pessoa
 {
@@ -9,14 +12,14 @@ class Aluno: public Pessoa
         int anoMatricula;
 
     public:
-        Aluno(std::string _nome, std::string _email, int _telefone, int _idade, int _anoMatricula);
+        Aluno(string _nome, string _email, int _telefone, int _idade, int _anoMatricula);
 
         void setAnoMatricula(int anoMatricula);
 
         int getAnoMatricula();
 };
 
-Aluno :: Aluno(std::string _nome, std::string _email, int _telefone, int _idade, int _anoMatricula){
+Aluno :: Aluno(string _nome, string _email, int _telefone, int _idade, int _anoMatricula){
     setNome(_nome);
     setEmail(_email);
     setTelefone(_telefone);
