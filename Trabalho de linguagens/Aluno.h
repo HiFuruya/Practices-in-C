@@ -14,6 +14,10 @@ class Aluno: public Pessoa
     public:
         Aluno(string _nome, string _email, int _telefone, int _idade, int _anoMatricula);
 
+        void Imprimir(){
+            cout << "Imprimindo Aluno";
+        }
+
         void setAnoMatricula(int anoMatricula);
 
         int getAnoMatricula();

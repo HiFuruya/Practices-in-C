@@ -21,17 +21,31 @@ public:
 
     Pessoa();
 
+    virtual void Imprimir(){
+        cout << "Imprimindo Pessoa";
+    }
+
     void setNome(string _nome);
     string getNome();
 
     void setEmail(string _email);
     string getEmail();
 
-    void setTelefone(int _telefone);
-    int getTelefone();
+    void setTelefone(int _telefone){
+        telefone = _telefone;
+    }
 
-    void setIdade(int _idade);
-    int getIdade();
+    int getTelefone(){
+        return telefone;
+    }
+
+    void setIdade(int _idade){
+        idade = _idade;
+    }
+
+    int getIdade(){
+        return idade;
+    }
 };
 
 Pessoa :: Pessoa(string _nome, string _email, int _telefone, int _idade){
@@ -59,20 +73,6 @@ string Pessoa :: getEmail(){
     return email;
 }
 
-void Pessoa :: setTelefone(int _telefone){
-    telefone = _telefone;
-}
 
-int Pessoa :: getTelefone(){
-    return telefone;
-}
-
-void Pessoa :: setIdade(int _idade){
-    idade = _idade;
-}
-
-int Pessoa :: getIdade(){
-    return idade;
-}
 
 #endif

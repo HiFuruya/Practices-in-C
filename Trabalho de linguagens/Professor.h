@@ -16,6 +16,10 @@ class Professor: public Pessoa
     public:
         Professor(string _nome, string _email, int _telefone, int _idade, string _materia);
 
+        void Imprimir(){
+            cout << "Imprimindo Professor";
+        }
+
         void setMateria(string _materia);
 
         string getMateria();
